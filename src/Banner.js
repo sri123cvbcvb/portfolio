@@ -9,9 +9,10 @@ function Banner(){
     const [forward, setForward] = useState(true);
   
     // Array containing the text to be typed
-    const textsToType = ["Web Developer", "Java Developer", "Software Developer"];
+   
   
     useEffect(() => {
+      const textsToType = ["Web Developer", "Java Developer", "Software Developer"];
       const interval = setInterval(() => {
         if (forward) {
           // Typing forward
@@ -32,7 +33,7 @@ function Banner(){
       }, 100); // Change this value to adjust typing speed
   
       return () => clearInterval(interval);
-    }, [text, forward, index, textsToType]); 
+    }, [text, forward, index]); 
     return(
         <section id="home" className="w3l-banner py-5">
         <div className="container">
