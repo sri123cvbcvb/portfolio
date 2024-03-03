@@ -4,13 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaptop, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [isMobileMenuActive, setMobileMenuActive] = useState(false);
 
-  const switchTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
+  
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const switchTheme = (e) => {
+    const newTheme = e.target.checked ? 'dark' : 'light';
+    setTheme(newTheme);
+  };
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
@@ -38,7 +45,7 @@ const Header = () => {
   }, []);
 
   const handleMobileMenuToggle = () => {
-    setMobileMenuActive(prevState => !prevState);
+    setMobileMenuActive((prevState) => !prevState);
   };
 
   const handleNavLinkClick = () => {
@@ -46,9 +53,9 @@ const Header = () => {
   };
 
   return (
-    <header id="site-header" className={`fixed-top ${isMobileMenuActive ? 'active' : ''}`}>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg stroke">
+    <header id="site-header" className={`fixed-top ${isMobileMenuActive ? 'active' : ''} ${theme}`}>
+    <div className="container">
+      <nav className={`navbar navbar-expand-lg stroke ${theme}`}>
           <Link className="navbar-brand" to="/" onClick={handleNavLinkClick}>
           <FontAwesomeIcon icon={faLaptop} />Sriram
           </Link>
